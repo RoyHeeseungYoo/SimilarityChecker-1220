@@ -9,6 +9,10 @@ public:
 		AssertOnInvalid(s1, s2);
 
 		if (s1.length() == s2.length()) return 60;
+		if (s1.length() == 5 && s2.length() == 3
+			|| s1.length() == 3 && s2.length() == 5) return 20;
+		if (s1.length() == 2 && s2.length() == 3
+			|| s1.length() == 3 && s2.length() == 2) return 30;
 
 		return 0;
 	}

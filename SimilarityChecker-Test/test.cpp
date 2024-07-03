@@ -19,3 +19,11 @@ TEST(SimilarityCheckerTest, ZeroPoints) {
 	EXPECT_EQ(0, checker.inspectLength("A", "BB"));
 	EXPECT_EQ(0, checker.inspectLength("AA", "B"));
 }
+
+TEST(SimilarityCheckerTest, PartialPoints) {
+	SimilarityChecker checker;
+	EXPECT_EQ(20, checker.inspectLength("AAABB", "BAA"));
+	EXPECT_EQ(30, checker.inspectLength("AA", "AAE"));
+	EXPECT_EQ(20, checker.inspectLength("BAA", "AAABB"));
+	EXPECT_EQ(30, checker.inspectLength("AAE", "AA"));
+}
