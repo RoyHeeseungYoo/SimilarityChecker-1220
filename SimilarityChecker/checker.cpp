@@ -8,7 +8,7 @@ public:
 	int inspectLength(const string& s1, const string& s2) {
 		AssertOnInvalid(s1, s2);
 
-		if (s1.length() == 3 && s2.length() == 3) return 60;
+		if (s1.length() == s2.length()) return 60;
 
 		return 0;
 	}
