@@ -13,3 +13,9 @@ TEST(SimilarityCheckerTest, MaxPoints) {
 	SimilarityChecker checker;
 	EXPECT_EQ(60, checker.inspectLength("ASD", "DSA"));
 }
+
+TEST(SimilarityCheckerTest, ZeroPoints) {
+	SimilarityChecker checker;
+	EXPECT_EQ(0, checker.inspectLength("A", "BB"));
+	EXPECT_EQ(0, checker.inspectLength("AA", "B"));
+}
