@@ -1,6 +1,10 @@
 #include "pch.h"
+#include <stdexcept>
 #include "../SimilarityChecker/checker.cpp"
 
-TEST(SimilarityCheckerTest, TestName) {
-  EXPECT_EQ(1, 1);
+using namespace std;
+
+TEST(SimilarityCheckerTest, ZeroLengthException) {
+	SimilarityChecker checker;
+	EXPECT_THROW(checker.inspectLength("ASD", ""), length_error);
 }
