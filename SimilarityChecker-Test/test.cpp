@@ -21,3 +21,8 @@ TEST(SimilarityCheckerTest, ZeroAlphaPoints) {
 	SimilarityChecker checker;
 	EXPECT_EQ(0, checker.inspectAlphabet("A", "BB"));
 }
+
+TEST(SimilarityCheckerTest, PartialAlphaPoints) {
+	SimilarityChecker checker;
+	EXPECT_EQ(20, checker.inspectAlphabet("AA", "AAE"));
+}

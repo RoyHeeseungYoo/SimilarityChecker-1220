@@ -11,21 +11,12 @@ public:
 
 		int totalCnt = 0;
 		int sameCnt = 0;
-
 		int alphaHit[26] = { HIT_BY_NOTHING, };
-		for (const char& ch : s1) {
-			int idx = ch - 'A';
-			if (alphaHit[idx] == HIT_BY_NOTHING) totalCnt++;
-			alphaHit[idx] = HIT_BY_STRING_1;
-		}
-		for (const char& ch : s2) {
-			int idx = ch - 'A';
-			if (alphaHit[idx] == HIT_BY_NOTHING) totalCnt++;
-			else if (alphaHit[idx] == HIT_BY_STRING_1)sameCnt++;
-			alphaHit[idx] = HIT_BY_STRING_2;
-		}
 
-		return (int)((float)MAX_ALPHA_POINT * (float)sameCnt / (float)totalCnt );
+		processString1(s1, alphaHit, totalCnt);
+		processString2(s2, alphaHit, totalCnt, sameCnt);
+
+		return calculateFinalAlphaPoint(sameCnt, totalCnt);
 	}
 
 private:
@@ -42,6 +33,45 @@ private:
 			if (ch < 'A' || ch > 'Z') return true;
 		}
 		return false;
+	}
+
+	int calculateFinalAlphaPoint(int sameCnt, int totalCnt)
+	{
+		return (int)((float)MAX_ALPHA_POINT * (float)sameCnt / (float)totalCnt);
+	}
+
+	void processString2(const std::string& s2, int  alphaHit[26], int& totalCnt, int& sameCnt)
+	{
+		for (const char& ch : s2) {
+			int idx = getAlphaHitIndex(ch);
+			if (isHitByNothing(alphaHit, idx)) totalCnt++;
+			if (isHitByString1(alphaHit, idx)) sameCnt++;
+			alphaHit[idx] = HIT_BY_STRING_2;
+		}
+	}
+
+	void processString1(const std::string& s1, int  alphaHit[26], int& totalCnt)
+	{
+		for (const char& ch : s1) {
+			int idx = getAlphaHitIndex(ch);
+			if (isHitByNothing(alphaHit, idx)) totalCnt++;
+			alphaHit[idx] = HIT_BY_STRING_1;
+		}
+	}
+
+	bool isHitByString1(int  alphaHit[26], int idx)
+	{
+		return alphaHit[idx] == HIT_BY_STRING_1;
+	}
+
+	bool isHitByNothing(int  alphaHit[26], int idx)
+	{
+		return alphaHit[idx] == HIT_BY_NOTHING;
+	}
+
+	int getAlphaHitIndex(const char& ch)
+	{
+		return ch - 'A';
 	}
 
 	const int MAX_ALPHA_POINT = 40;
