@@ -16,3 +16,8 @@ TEST(SimilarityCheckerTest, MaxAlphaPoints) {
 	SimilarityChecker checker;
 	EXPECT_EQ(40, checker.inspectAlphabet("ASD", "DSA"));
 }
+
+TEST(SimilarityCheckerTest, ZeroAlphaPoints) {
+	SimilarityChecker checker;
+	EXPECT_EQ(0, checker.inspectAlphabet("A", "BB"));
+}

@@ -1,4 +1,5 @@
 #include <string>
+#include <iostream>
 #include <stdexcept>
 
 using namespace std;
@@ -11,20 +12,20 @@ public:
 		int totalCnt = 0;
 		int sameCnt = 0;
 
-		bool alphaHit[26] = { false, };
+		int alphaHit[26] = { 0, };
 		for (const char& ch : s1) {
 			int idx = ch - 'A';
 			if (!alphaHit[idx]) totalCnt++;
-			alphaHit[idx] = true;
+			alphaHit[idx] = 1;
 		}
 		for (const char& ch : s2) {
 			int idx = ch - 'A';
 			if (!alphaHit[idx]) totalCnt++;
-			else sameCnt++;
-			alphaHit[idx] = true;
+			else if (alphaHit[idx] == 1)sameCnt++;
+			alphaHit[idx] = 2;
 		}
 
-		return (int)((float)MAX_ALPHA_POINT * (float)totalCnt / (float)sameCnt);
+		return (int)((float)MAX_ALPHA_POINT * (float)sameCnt / (float)totalCnt );
 	}
 
 private:
