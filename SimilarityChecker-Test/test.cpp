@@ -1,6 +1,28 @@
 #include "pch.h"
+#include <stdexcept>
 #include "../SimilarityChecker/checker.cpp"
 
-TEST(SimilarityCheckerTest, TestName) {
-  EXPECT_EQ(1, 1);
+using namespace std;
+
+TEST(SimilarityCheckerTest, ExceptionOnInvalid) {
+	SimilarityChecker checker;
+	EXPECT_THROW(checker.inspectAlphabet("aBC", "ABC"), invalid_argument);
+	EXPECT_THROW(checker.inspectAlphabet("1aBC", "ABC"), invalid_argument);
+	EXPECT_THROW(checker.inspectAlphabet("^aBC", "ABC"), invalid_argument);
+	EXPECT_THROW(checker.inspectAlphabet("ABC", "2ABC"), invalid_argument);
+}
+
+TEST(SimilarityCheckerTest, MaxAlphaPoints) {
+	SimilarityChecker checker;
+	EXPECT_EQ(40, checker.inspectAlphabet("ASD", "DSA"));
+}
+
+TEST(SimilarityCheckerTest, ZeroAlphaPoints) {
+	SimilarityChecker checker;
+	EXPECT_EQ(0, checker.inspectAlphabet("A", "BB"));
+}
+
+TEST(SimilarityCheckerTest, PartialAlphaPoints) {
+	SimilarityChecker checker;
+	EXPECT_EQ(20, checker.inspectAlphabet("AA", "AAE"));
 }
