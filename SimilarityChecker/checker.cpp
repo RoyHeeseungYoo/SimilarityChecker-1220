@@ -12,17 +12,17 @@ public:
 		int totalCnt = 0;
 		int sameCnt = 0;
 
-		int alphaHit[26] = { 0, };
+		int alphaHit[26] = { HIT_BY_NOTHING, };
 		for (const char& ch : s1) {
 			int idx = ch - 'A';
-			if (!alphaHit[idx]) totalCnt++;
-			alphaHit[idx] = 1;
+			if (alphaHit[idx] == HIT_BY_NOTHING) totalCnt++;
+			alphaHit[idx] = HIT_BY_STRING_1;
 		}
 		for (const char& ch : s2) {
 			int idx = ch - 'A';
-			if (!alphaHit[idx]) totalCnt++;
-			else if (alphaHit[idx] == 1)sameCnt++;
-			alphaHit[idx] = 2;
+			if (alphaHit[idx] == HIT_BY_NOTHING) totalCnt++;
+			else if (alphaHit[idx] == HIT_BY_STRING_1)sameCnt++;
+			alphaHit[idx] = HIT_BY_STRING_2;
 		}
 
 		return (int)((float)MAX_ALPHA_POINT * (float)sameCnt / (float)totalCnt );
@@ -45,4 +45,7 @@ private:
 	}
 
 	const int MAX_ALPHA_POINT = 40;
+	const int HIT_BY_NOTHING = 0;
+	const int HIT_BY_STRING_1 = 1;
+	const int HIT_BY_STRING_2 = 2;
 };
