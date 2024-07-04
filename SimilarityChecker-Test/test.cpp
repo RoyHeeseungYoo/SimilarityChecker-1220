@@ -11,3 +11,8 @@ TEST(SimilarityCheckerTest, ExceptionOnInvalid) {
 	EXPECT_THROW(checker.inspectAlphabet("^aBC", "ABC"), invalid_argument);
 	EXPECT_THROW(checker.inspectAlphabet("ABC", "2ABC"), invalid_argument);
 }
+
+TEST(SimilarityCheckerTest, MaxAlphaPoints) {
+	SimilarityChecker checker;
+	EXPECT_EQ(40, checker.inspectAlphabet("ASD", "DSA"));
+}
